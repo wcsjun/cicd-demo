@@ -57,6 +57,6 @@ jobs:
             nohup java -jar /home/cicd/application.jar  >/home/cicd/logs/application.log &
           host: ${{ secrets.HOST }}
           user: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.PASSWORD }}
+          pass: ${{ secrets.PASSWORD }}
           args: "-tt"
     needs: build
