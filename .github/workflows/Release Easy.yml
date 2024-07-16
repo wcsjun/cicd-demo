@@ -22,6 +22,9 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
+  release:
+    runs-on: ubuntu-latest
+    steps:
       - name: Zip the Build
         run: zip -r ${{ secrets.ReleaseZipName }} ./target/*.jar
 
@@ -37,3 +40,4 @@ jobs:
           files: |
             ${{ secrets.ReleaseZipName }}.zip
             LICENSE 
+    needs: build
