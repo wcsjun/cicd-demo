@@ -44,7 +44,7 @@ jobs:
       - name: Copy single file to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: /code-demo-0.0.1-SNAPSHOT.jar
+          local: code-demo-0.0.1-SNAPSHOT.jar
           remote: /home/cicd/code-demo-0.0.1-SNAPSHOT.jar
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
