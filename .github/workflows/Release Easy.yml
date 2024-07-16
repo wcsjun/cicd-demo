@@ -41,10 +41,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: $ARTIFACT_NAME
-          path: ./target
 
       - name: Zip the Build
-        run: zip -r ${{ secrets.ReleaseZipName }} ./target/*.jar
+        run: zip -r ${{ secrets.ReleaseZipName }} ./*.jar
 
       - name: Create Release and Upload Release Asset
         uses: softprops/action-gh-release@v1
