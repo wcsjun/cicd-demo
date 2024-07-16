@@ -54,8 +54,9 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd /home/cicd/ && java -jar application.jar &
+            cd /home/cicd
+            java -jar application.jar &
           host: ${{ secrets.HOST }}
           user: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
     needs: build
