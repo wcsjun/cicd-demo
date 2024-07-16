@@ -1,4 +1,4 @@
-name: Main
+name: CICD for Deploy
 
 on:
   workflow_dispatch:
@@ -44,7 +44,7 @@ jobs:
       - name: Copy single file to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: ${{ env.ARTIFACT_NAME }}
+          local: ./*.jar
           remote: /home/cicd/${{ env.ARTIFACT_NAME }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
