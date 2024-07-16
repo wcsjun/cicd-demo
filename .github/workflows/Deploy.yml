@@ -53,8 +53,7 @@ jobs:
       - name: ls -a via ssh
         uses: fifsky/ssh-action@master
         with:
-          command: |
-            nohup java -jar /home/cicd/application.jar  >/home/cicd/logs/application.log &
+          command: nohup java -jar /home/cicd/application.jar  > /home/cicd/logs/application.log &
           host: ${{ secrets.HOST }}
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.PASSWORD }}
