@@ -39,15 +39,15 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v2
         with:
-          name: application.jar
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ./target/
 
       - name: Copy single file to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: ./*.jar
+          local: ./target/*.jar
           remote: /home/cicd/*.jar
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-
     needs: build
