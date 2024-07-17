@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "Using JAVA_OPTS:"
-for arg in $JAVA_OPTS do
+for arg in $JAVA_OPTS
+do
     echo $arg
 done
 
