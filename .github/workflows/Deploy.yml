@@ -41,9 +41,6 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
 
-      - name: print
-        run: ls -a
-
       - name: Copy single file to remote
         uses: garygrossgarten/github-action-scp@release
         with:
@@ -52,6 +49,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
+          rmRemote: true
 
       - name: ls -a via ssh
         uses: fifsky/ssh-action@master
@@ -61,5 +59,5 @@ jobs:
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.PASSWORD }}
           args: "-tt"
-          rmRemote: true
+
     needs: build
