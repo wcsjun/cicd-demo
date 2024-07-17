@@ -8,4 +8,4 @@ RUN chmod a+rx /usr/local/cloud/bin/start.sh
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY target/*.jar /usr/local/cloud/webapps/application.jar
 
-CMD ["bin/start.sh"]
+CMD ["/usr/local/cloud/bin/start.sh"]
