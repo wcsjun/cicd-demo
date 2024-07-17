@@ -3,9 +3,6 @@ name: CICD for Deploy
 on:
   workflow_dispatch:
 
-env:
-  ARTIFACT_NAME: CICD_DEMO
-
 
 jobs:
   build:
@@ -24,32 +21,8 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ./target/*.jar
-
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-
-#      - name: Copy single file to remote
-#        uses: garygrossgarten/github-action-scp@release
-#        with:
-#          local: code-demo-0.0.1-SNAPSHOT.jar
-#          remote: /home/cicd/application.jar
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.SSH_USER }}
-#          password: ${{ secrets.PASSWORD }}
-#          rmRemote: true
+      - name: modify file name
+        run: mv target/*.jar application.jar
 
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.7
@@ -57,13 +30,13 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          source: "code-demo-0.0.1-SNAPSHOT.jar"
+          source: "application.jar"
           target: /home/cicd/
 
       - name: ls -a via ssh
         uses: fifsky/ssh-action@master
         with:
-          command: nohup java -jar /home/cicd/code-demo-0.0.1-SNAPSHOT.jar  > /home/cicd/logs/application.log &
+          command: nohup java -jar /home/cicd/application.jar  > /home/cicd/logs/application.log &
           host: ${{ secrets.HOST }}
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.PASSWORD }}
