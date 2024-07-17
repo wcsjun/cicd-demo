@@ -41,5 +41,3 @@ jobs:
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.PASSWORD }}
           args: "-tt"
-
-    needs: build
